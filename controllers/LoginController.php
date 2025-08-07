@@ -8,52 +8,52 @@ use MVC\Router;
 
 class LoginController{
 
-    // public static function login(Router $router){
-    //     $alertas = [];        
+    public static function login(Router $router){
+        $alertas = [];        
 
-    //     if($_SERVER['REQUEST_METHOD'] === 'POST') {
-    //         $auth = new Usuario($_POST);
-    //         $alertas = $auth->validarLogin();
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $auth = new Usuario($_POST);
+            $alertas = $auth->validarLogin();
 
-    //         if(empty($alertas)) {
-    //             //Comprobar que exista el usuario
-    //             $usuario = Usuario::where('email', $auth->email);
+            if(empty($alertas)) {
+                //Comprobar que exista el usuario
+                $usuario = Usuario::where('email', $auth->email);
                 
-    //             if($usuario) {
-    //                 //Veryficar el password
-    //                 if($usuario->comprobarPasswordAndVerificado($auth->password)) {
-    //                     //autenticar al usuario
-    //                     if (session_status() === PHP_SESSION_NONE) {
-    //                         session_start();
-    //                     }
+                if($usuario) {
+                    //Veryficar el password
+                    if($usuario->comprobarPasswordAndVerificado($auth->password)) {
+                        //autenticar al usuario
+                        if (session_status() === PHP_SESSION_NONE) {
+                            session_start();
+                        }
 
-    //                     $_SESSION['id'] = $usuario->id;
-    //                     $_SESSION['nombre'] = $usuario->nombre . ' ' . $usuario->apellido;
-    //                     $_SESSION['email'] = $usuario->email;
-    //                     $_SESSION['login'] = true;
+                        $_SESSION['id'] = $usuario->id;
+                        $_SESSION['nombre'] = $usuario->nombre . ' ' . $usuario->apellido;
+                        $_SESSION['email'] = $usuario->email;
+                        $_SESSION['login'] = true;
 
-    //                     //redireccionamieinto                        
-    //                     if($usuario->admin === "1") {                            
-    //                         $_SESSION['admin'] = $usuario->admin ?? null;
+                        //redireccionamieinto                        
+                        if($usuario->admin === "1") {                            
+                            $_SESSION['admin'] = $usuario->admin ?? null;
 
-    //                         header('Location: /admin');
-    //                     } else {
-    //                         header('Location: /cita');
-    //                     }
+                            header('Location: /admin');
+                        } else {
+                            header('Location: /cita');
+                        }
                         
-    //                 }
-    //             } else {
-    //                 Usuario::setAlerta('error', 'Usuario no encontrado');
-    //             }
-    //         }
-    //     }        
+                    }
+                } else {
+                    Usuario::setAlerta('error', 'Usuario no encontrado');
+                }
+            }
+        }        
 
-    //     $alertas = Usuario::getAlertas();
+        $alertas = Usuario::getAlertas();
 
-    //     $router->render('auth/login', [
-    //         'alertas' => $alertas,            
-    //     ]);
-    // }
+        $router->render('auth/login', [
+            'alertas' => $alertas,            
+        ]);
+    }
 
     public static function logout(){
         if(session_status() === PHP_SESSION_NONE) {
