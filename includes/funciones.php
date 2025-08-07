@@ -28,10 +28,16 @@ function isAuth() : void {
 }
 
 function isAdmin() : void {
-    if(!isset($_SESSION['admin'])) {
+    if(session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    if(!isset($_SESSION['admin']) || $_SESSION['admin'] != 1) {
         header('Location: /');
-    };
+        exit;
+    }
 }
+
 
 function mostrarNotificacion($codigo){
     $mensaje = '';
