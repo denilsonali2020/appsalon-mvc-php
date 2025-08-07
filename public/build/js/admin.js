@@ -1,0 +1,1 @@
+function iniciarApp(){ocultarAlert()}function ocultarAlert(){const t=document.querySelector("p.alerta");t&&setTimeout(()=>{t.style.display="none"},2e3)}document.addEventListener("DOMContentLoaded",function(){iniciarApp()});

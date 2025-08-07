@@ -1,0 +1,88 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+@use 'sass:color';
+
+
+.contenedor-app{
+    @include m.tablet{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        min-height: 100vh;                
+    }
+
+    .imagen{
+        height: 20rem;
+        background-image: url(../img/1.jpg);        
+        background-size: cover;
+        background-position: center center;        
+        @include m.tablet{
+            height: auto;
+        }
+    }
+
+    .app{
+        width: 95%;
+        margin: 0 auto;
+        padding: 3rem 0;
+
+        @include m.tablet {
+            overflow: scroll;
+            // Oculta scrollbar en navegadores modernos
+            scroll-behavior: smooth;
+            scrollbar-width: none;       // Firefox
+            -ms-overflow-style: none;    // IE 10+
+            
+            &::-webkit-scrollbar {       // Chrome, Safari
+                display: none;
+            }
+        }
+    }
+}
+
+.nombre-pagina{
+    text-align: center;
+    margin: 5rem 0;
+    font-weight: v.$bold;
+}
+
+.descripcion-pagina{
+    text-align: center;
+}
+
+.barra {
+    margin: v.$separacion 0;
+
+    @include m.tablet{
+        display: flex;
+        justify-content: space-between;
+        align-items: center
+    }
+
+     .boton {
+        //@include m.boton(v.$gris, v.$negro);
+        
+        margin: 0;
+        border-radius: 1rem;
+        transition-property: transform;
+        transition-duration: 300ms;
+        &:hover {
+            transform: scale(1.02);
+        }  
+
+        @include m.boton(v.$gris, v.$negro);
+     }
+}
+
+.barra-servicios {
+    margin-bottom: v.$separacion;    
+
+    .boton {
+        margin: 0 0 1rem 0;
+    }
+
+    @include m.tablet {
+        display: flex;
+        justify-content: space-between;               
+    }
+
+}
